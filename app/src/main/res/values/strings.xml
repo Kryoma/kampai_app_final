@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">KampaiAppFinal</string>
+
+    <string name="national_flag_name_thai">"タイ"</string>
+    <string name="national_flag_name_korea">"韓国"</string>
+    <string name="national_flag_name_america">"アメリカ"</string>
+    <string name="national_flag_name_japan">"日本"</string>
+
+    <string name="kampai_line_thai">"ชนแก้ว"</string>
+    <string name="kampai_line_korea">"건배"</string>
+    <string name="kampai_line_america">"Cheers"</string>
+    <string name="kampai_line_japan">"乾杯"</string>
+
+    <string name="how_read_thai">"chon kɛ̂ɛw"</string>
+    <string name="how_read_korea">"keon-bae"</string>
+    <string name="how_read_america">"tʃɪəz"</string>
+    <string name="how_read_japan">"kampai"</string>
+
 </resources>

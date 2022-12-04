@@ -14,7 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,6 +42,48 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
+    // 変数宣言
+    // 国旗
+    var nationalFragImage: Painter
+    // 国名
+    var nationalFlagName: String
+    // 乾杯の挨拶
+    var kampaiLine: String
+    // 読み方
+    var howRead: String
+
+    val num: Int = RandomActivity()
+    when(num){
+        // 日本
+        1 -> {
+            nationalFragImage = painterResource(id = R.drawable.japan)
+            nationalFlagName = stringResource(id = R.string.national_flag_name_japan)
+            kampaiLine = stringResource(id = R.string.kampai_line_japan)
+            howRead = stringResource(id = R.string.how_read_japan)
+        }
+        // 韓国
+        2 -> {
+            nationalFragImage = painterResource(id = R.drawable.korea)
+            nationalFlagName = stringResource(id = R.string.national_flag_name_korea)
+            kampaiLine = stringResource(id = R.string.kampai_line_korea)
+            howRead = stringResource(id = R.string.how_read_korea)
+        }
+        // アメリカ
+        3 -> {
+            nationalFragImage = painterResource(id = R.drawable.usa)
+            nationalFlagName = stringResource(id = R.string.national_flag_name_america)
+            kampaiLine = stringResource(id = R.string.kampai_line_america)
+            howRead = stringResource(id = R.string.how_read_america)
+        }
+        //タイ
+        4 -> {
+            nationalFragImage = painterResource(id = R.drawable.thai)
+            nationalFlagName = stringResource(id = R.string.national_flag_name_thai)
+            kampaiLine = stringResource(id = R.string.kampai_line_thai)
+            howRead = stringResource(id = R.string.how_read_thai)
+
+        }
+    }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -49,7 +93,7 @@ fun App() {
     ) {
 
         Text(
-            text = "日本",
+            text = nationalFlagName,
             fontSize = 36.sp,
             fontWeight = FontWeight.ExtraBold
         )
@@ -61,17 +105,17 @@ fun App() {
                 .border(
                     BorderStroke(1.dp, Color.Black)
                 ),
-            painter = painterResource(R.drawable._00px_flag_of_japan_jpg),
-            contentDescription = "国旗"
+            painter = nationalFragImage,
+            contentDescription = "National Frag"
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
-            text = "乾杯",
+            text = kampaiLine,
             fontSize = 50.sp,
             modifier = Modifier.padding(16.dp)
         )
         Text(
-            text = "kampai",
+            text = howRead,
             fontSize = 16.sp,
             color = Color.LightGray
         )
