@@ -1,12 +1,135 @@
 package com.example.kampaiappfinal
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
+@Composable
 fun KampaiMain(
-    nationalFragImage: Painter,
-    nationalFlagLine: String,
-    howRead: String
 ){
+//    val num: Int = RandomActivity()
+//    when(num){
+//        // 日本
+//        1 -> {
+//            nationalFragImage = painterResource(id = R.drawable.japan)
+//            nationalFlagName = stringResource(id = R.string.national_flag_name_japan)
+//            kampaiLine = stringResource(id = R.string.kampai_line_japan)
+//            howRead = stringResource(id = R.string.how_read_japan)
+//        }
+//        // 韓国
+//        2 -> {
+//            nationalFragImage = painterResource(id = R.drawable.korea)
+//            nationalFlagName = stringResource(id = R.string.national_flag_name_korea)
+//            kampaiLine = stringResource(id = R.string.kampai_line_korea)
+//            howRead = stringResource(id = R.string.how_read_korea)
+//        }
+//        // アメリカ
+//        3 -> {
+//            nationalFragImage = painterResource(id = R.drawable.usa)
+//            nationalFlagName = stringResource(id = R.string.national_flag_name_america)
+//            kampaiLine = stringResource(id = R.string.kampai_line_america)
+//            howRead = stringResource(id = R.string.how_read_america)
+//        }
+//        //タイ
+//        4 -> {
+//            nationalFragImage = painterResource(id = R.drawable.thai)
+//            nationalFlagName = stringResource(id = R.string.national_flag_name_thai)
+//            kampaiLine = stringResource(id = R.string.kampai_line_thai)
+//            howRead = stringResource(id = R.string.how_read_thai)
+//
+//        }
+//    }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        if (DrinkButton()) {
+            KampaiContents()
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+    }
 
+}
 
+@Composable
+fun KampaiContents(){
+    // 変数宣言
+    // 国旗
+    var nationalFragImage: Painter = painterResource(id = R.drawable.japan)
+    // 国名
+    var nationalFlagName: String = stringResource(id = R.string.national_flag_name_japan)
+    // 乾杯の挨拶
+    var kampaiLine: String = stringResource(id = R.string.kampai_line_japan)
+    // 読み方
+    var howRead: String = stringResource(id = R.string.how_read_japan)
+
+    Text(
+        text = nationalFlagName,
+        fontSize = 36.sp,
+        fontWeight = FontWeight.ExtraBold
+    )
+    Spacer(modifier = Modifier.height(56.dp))
+    Image(
+        modifier = Modifier
+            .size(250.dp, 160.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .border(
+                BorderStroke(1.dp, Color.Black)
+            ),
+        painter = nationalFragImage,
+        contentDescription = "National Frag"
+    )
+    Spacer(modifier = Modifier.height(20.dp))
+    Text(
+        text = kampaiLine,
+        fontSize = 50.sp,
+        modifier = Modifier.padding(16.dp)
+    )
+    Text(
+        text = howRead,
+        fontSize = 16.sp,
+        color = Color.LightGray
+    )
+}
+
+@Composable
+fun DrinkButton(): Boolean{
+    var isShowContentsFlg by remember { mutableStateOf(false) }
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .size(250.dp, 115.dp)
+            .clip(RoundedCornerShape(10.dp)),
+        onClick = { isShowContentsFlg = !isShowContentsFlg},
+        colors = ButtonDefaults.textButtonColors(
+            backgroundColor = Color.DarkGray,
+            contentColor = Color.White
+        )
+    ){
+        Text(
+            text = "飲む",
+            fontSize = 26.sp
+        )
+    }
+
+    return isShowContentsFlg
 }
