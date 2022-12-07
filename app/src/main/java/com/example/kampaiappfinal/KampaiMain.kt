@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun KampaiMain(
-){
+) {
 //    val num: Int = RandomActivity()
 //    when(num){
 //        // 日本
@@ -62,25 +62,51 @@ fun KampaiMain(
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        if (DrinkButton()) {
-            KampaiContents()
-        }
+        // 変数宣言
+        // 国旗
+        var nationalFragImage: Painter = painterResource(id = R.drawable.japan)
+        // 国名
+        var nationalFlagName: String = stringResource(id = R.string.national_flag_name_japan)
+        // 乾杯の挨拶
+        var kampaiLine: String = stringResource(id = R.string.kampai_line_japan)
+        // 読み方
+        var howRead: String = stringResource(id = R.string.how_read_japan)
+        // コンテンツの表示有無
+        var isShowContents: Boolean by remember { mutableStateOf(false) }
+
+//        if (isShowContents) {
+//            KampaiContents(
+//                nationalFlagName,
+//                nationalFragImage,
+//                kampaiLine,
+//                howRead
+//            )
+
+        if (isShowContents) {
+            KampaiContents(
+                nationalFlagName = "男",
+                nationalFragImage = painterResource(id = R.drawable.win_20221207_23_24_17_pro),
+                kampaiLine = "久保",
+                howRead = "くぼ"
+            )} else KampaiContents(
+            nationalFlagName = "",
+            nationalFragImage = painterResource(id = R.drawable.hatenamark),
+            kampaiLine = "",
+            howRead = ""
+        )
         Spacer(modifier = Modifier.height(20.dp))
+        isShowContents = DrinkButton()
     }
 
 }
 
 @Composable
-fun KampaiContents(){
-    // 変数宣言
-    // 国旗
-    var nationalFragImage: Painter = painterResource(id = R.drawable.japan)
-    // 国名
-    var nationalFlagName: String = stringResource(id = R.string.national_flag_name_japan)
-    // 乾杯の挨拶
-    var kampaiLine: String = stringResource(id = R.string.kampai_line_japan)
-    // 読み方
-    var howRead: String = stringResource(id = R.string.how_read_japan)
+fun KampaiContents(
+    nationalFlagName: String,
+    nationalFragImage: Painter,
+    kampaiLine: String,
+    howRead: String
+) {
 
     Text(
         text = nationalFlagName,
@@ -92,9 +118,8 @@ fun KampaiContents(){
         modifier = Modifier
             .size(250.dp, 160.dp)
             .clip(RoundedCornerShape(10.dp))
-            .border(
-                BorderStroke(1.dp, Color.Black)
-            ),
+//            .border(BorderStroke(3.dp, Color.Black))
+        ,
         painter = nationalFragImage,
         contentDescription = "National Frag"
     )
@@ -112,21 +137,22 @@ fun KampaiContents(){
 }
 
 @Composable
-fun DrinkButton(): Boolean{
+fun DrinkButton(): Boolean {
     var isShowContentsFlg by remember { mutableStateOf(false) }
     Button(
         modifier = Modifier
             .fillMaxWidth()
             .size(250.dp, 115.dp)
             .clip(RoundedCornerShape(10.dp)),
-        onClick = { isShowContentsFlg = !isShowContentsFlg},
+
+        onClick = { isShowContentsFlg = !isShowContentsFlg },
         colors = ButtonDefaults.textButtonColors(
             backgroundColor = Color.DarkGray,
             contentColor = Color.White
         )
-    ){
+    ) {
         Text(
-            text = "飲む",
+            text = "Push, bro!",
             fontSize = 26.sp
         )
     }
