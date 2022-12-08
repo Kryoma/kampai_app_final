@@ -1,5 +1,5 @@
 package com.example.kampaiappfinal
 
-fun RandomActivity(): Int{
-    return (1..6).random()
+fun getRandomNumber(): Int{
+    return (1..4).random()
 }

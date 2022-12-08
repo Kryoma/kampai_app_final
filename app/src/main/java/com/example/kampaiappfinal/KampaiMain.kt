@@ -23,38 +23,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun KampaiMain(
 ) {
-//    val num: Int = RandomActivity()
-//    when(num){
-//        // 日本
-//        1 -> {
-//            nationalFragImage = painterResource(id = R.drawable.japan)
-//            nationalFlagName = stringResource(id = R.string.national_flag_name_japan)
-//            kampaiLine = stringResource(id = R.string.kampai_line_japan)
-//            howRead = stringResource(id = R.string.how_read_japan)
-//        }
-//        // 韓国
-//        2 -> {
-//            nationalFragImage = painterResource(id = R.drawable.korea)
-//            nationalFlagName = stringResource(id = R.string.national_flag_name_korea)
-//            kampaiLine = stringResource(id = R.string.kampai_line_korea)
-//            howRead = stringResource(id = R.string.how_read_korea)
-//        }
-//        // アメリカ
-//        3 -> {
-//            nationalFragImage = painterResource(id = R.drawable.usa)
-//            nationalFlagName = stringResource(id = R.string.national_flag_name_america)
-//            kampaiLine = stringResource(id = R.string.kampai_line_america)
-//            howRead = stringResource(id = R.string.how_read_america)
-//        }
-//        //タイ
-//        4 -> {
-//            nationalFragImage = painterResource(id = R.drawable.thai)
-//            nationalFlagName = stringResource(id = R.string.national_flag_name_thai)
-//            kampaiLine = stringResource(id = R.string.kampai_line_thai)
-//            howRead = stringResource(id = R.string.how_read_thai)
-//
-//        }
-//    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -64,31 +33,56 @@ fun KampaiMain(
     ) {
         // 変数宣言
         // 国旗
-        var nationalFragImage: Painter = painterResource(id = R.drawable.japan)
+        var nationalFragImage: Painter = painterResource(id = R.drawable.win_20221207_23_24_17_pro)
         // 国名
-        var nationalFlagName: String = stringResource(id = R.string.national_flag_name_japan)
+        var nationalFlagName: String = ""
         // 乾杯の挨拶
-        var kampaiLine: String = stringResource(id = R.string.kampai_line_japan)
+        var kampaiLine: String = ""
         // 読み方
-        var howRead: String = stringResource(id = R.string.how_read_japan)
+        var howRead: String = ""
         // コンテンツの表示有無
         var isShowContents: Boolean by remember { mutableStateOf(false) }
 
-//        if (isShowContents) {
-//            KampaiContents(
-//                nationalFlagName,
-//                nationalFragImage,
-//                kampaiLine,
-//                howRead
-//            )
-
         if (isShowContents) {
+            var num: Int = getRandomNumber()
+            when (num) {
+                // 日本
+                1 -> {
+                    nationalFragImage = painterResource(id = R.drawable.japan)
+                    nationalFlagName = stringResource(id = R.string.national_flag_name_japan)
+                    kampaiLine = stringResource(id = R.string.kampai_line_japan)
+                    howRead = stringResource(id = R.string.how_read_japan)
+                }
+                // 韓国
+                2 -> {
+                    nationalFragImage = painterResource(id = R.drawable.korea)
+                    nationalFlagName = stringResource(id = R.string.national_flag_name_korea)
+                    kampaiLine = stringResource(id = R.string.kampai_line_korea)
+                    howRead = stringResource(id = R.string.how_read_korea)
+                }
+                // アメリカ
+                3 -> {
+                    nationalFragImage = painterResource(id = R.drawable.usa)
+                    nationalFlagName = stringResource(id = R.string.national_flag_name_america)
+                    kampaiLine = stringResource(id = R.string.kampai_line_america)
+                    howRead = stringResource(id = R.string.how_read_america)
+                }
+                //タイ
+                4 -> {
+                    nationalFragImage = painterResource(id = R.drawable.thai)
+                    nationalFlagName = stringResource(id = R.string.national_flag_name_thai)
+                    kampaiLine = stringResource(id = R.string.kampai_line_thai)
+                    howRead = stringResource(id = R.string.how_read_thai)
+
+                }
+            }
             KampaiContents(
-                nationalFlagName = "男",
-                nationalFragImage = painterResource(id = R.drawable.win_20221207_23_24_17_pro),
-                kampaiLine = "久保",
-                howRead = "くぼ"
-            )} else KampaiContents(
+                nationalFlagName,
+                nationalFragImage,
+                kampaiLine,
+                howRead
+            )
+        } else KampaiContents(
             nationalFlagName = "",
             nationalFragImage = painterResource(id = R.drawable.hatenamark),
             kampaiLine = "",
@@ -116,10 +110,9 @@ fun KampaiContents(
     Spacer(modifier = Modifier.height(56.dp))
     Image(
         modifier = Modifier
-            .size(250.dp, 160.dp)
             .clip(RoundedCornerShape(10.dp))
-//            .border(BorderStroke(3.dp, Color.Black))
-        ,
+            .size(250.dp, 160.dp)
+            .border(BorderStroke(3.dp, Color.LightGray)),
         painter = nationalFragImage,
         contentDescription = "National Frag"
     )
@@ -151,10 +144,17 @@ fun DrinkButton(): Boolean {
             contentColor = Color.White
         )
     ) {
-        Text(
-            text = "Push, bro!",
-            fontSize = 26.sp
-        )
+        if (isShowContentsFlg) {
+            Text(
+                text = "Try Again!",
+                fontSize = 26.sp
+            )
+        } else {
+            Text(
+                text = "Push, bro!",
+                fontSize = 26.sp
+            )
+        }
     }
 
     return isShowContentsFlg
